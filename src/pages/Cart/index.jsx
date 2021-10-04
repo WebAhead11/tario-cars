@@ -1,12 +1,18 @@
-import React from "react";
+import React from "react"
+import { cars as carsAtom } from "../../state"
+import { useRecoilState } from "recoil"
+
 function Cart(props) {
+  const [cars, setCars] = useRecoilState(carsAtom)
+
   const onSubmit1 = (event) => {
-    event.preventDefault();
-    props.setCars([]);
-  };
+    event.preventDefault()
+    setCars([])
+  }
+
   return (
     <div>
-      {props.cars.map((car) => (
+      {cars.map((car) => (
         <div>
           <h1>{car.company}</h1>
           <h2>{car.model}</h2>
@@ -15,6 +21,6 @@ function Cart(props) {
       ))}
       <button onClick={onSubmit1}>purchase</button>
     </div>
-  );
+  )
 }
-export default Cart;
+export default Cart

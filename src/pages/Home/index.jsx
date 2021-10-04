@@ -1,17 +1,23 @@
-import React from "react";
-import { carCompanies, colors } from "../../data.js";
+import React from "react"
+import { carCompanies, colors } from "../../data.js"
+import { cars as carsAtom } from "../../state"
+import { useRecoilState } from "recoil"
+
 function Home(props) {
-  const [company, setCompany] = React.useState("");
-  const [models, setModels] = React.useState([]);
-  const [model, setModel] = React.useState("");
-  const [color, setColor] = React.useState("");
+  const [company, setCompany] = React.useState("")
+  const [models, setModels] = React.useState([])
+  const [model, setModel] = React.useState("")
+  const [color, setColor] = React.useState("")
+
+  const [cars, setCars] = useRecoilState(carsAtom)
+  console.log(cars)
   const onSubmit = (event) => {
-    event.preventDefault();
-    console.log({ company, model, color });
+    event.preventDefault()
+    console.log({ company, model, color })
     // props.cars
     // props.setCars
-    props.setCars(props.cars.concat({ company, model, color }));
-  };
+    setCars(cars.concat({ company, model, color }))
+  }
 
   return (
     <div>
@@ -19,7 +25,7 @@ function Home(props) {
       <form onSubmit={onSubmit}>
         <select
           onChange={(e) => {
-            setCompany(e.target.value);
+            setCompany(e.target.value)
             // console.log(
             //   carCompanies.find((car) => {
             //     return car.name === e.target.value;
@@ -27,37 +33,37 @@ function Home(props) {
             // );
             setModels(
               carCompanies.find((car) => {
-                return car.name === e.target.value;
+                return car.name === e.target.value
               }).models
-            );
+            )
           }}
         >
           <option value="" selected></option>
           {carCompanies.map((car) => {
-            return <option value={car.name}>{car.name}</option>;
+            return <option value={car.name}>{car.name}</option>
           })}
         </select>
         <select
           onChange={(e) => {
-            setModel(e.target.value);
+            setModel(e.target.value)
           }}
         >
           {models.map((car) => {
-            return <option value={car}>{car}</option>;
+            return <option value={car}>{car}</option>
           })}
         </select>
         <select
           onChange={(e) => {
-            setColor(e.target.value);
+            setColor(e.target.value)
           }}
         >
           {colors.map((car) => {
-            return <option value={car}>{car}</option>;
+            return <option value={car}>{car}</option>
           })}
         </select>
         <input type="submit"></input>
       </form>
     </div>
-  );
+  )
 }
-export default Home;
+export default Home

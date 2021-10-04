@@ -1,12 +1,12 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import Cart from "./pages/Cart";
-import Home from "./pages/Home";
-import React from "react";
+import logo from "./logo.svg"
+import "./App.css"
+import { BrowserRouter, Switch, Route, Link } from "react-router-dom"
+import Cart from "./pages/Cart"
+import Home from "./pages/Home"
+import React from "react"
+import { RecoilRoot } from "recoil"
 
 function App() {
-  const [cars, setCars] = React.useState([]);
   return (
     <div className="App">
       <BrowserRouter>
@@ -32,10 +32,10 @@ function App() {
               <h1>ABOUT PAGE</h1>
             </Route>
             <Route path="/cart">
-              <Cart cars={cars} setCars={setCars}></Cart>
+              <Cart />
             </Route>
             <Route exact path="/">
-              <Home cars={cars} setCars={setCars}></Home>
+              <Home />
             </Route>
             <Route path="/*">
               <h1>Default PAGE</h1>
@@ -44,7 +44,7 @@ function App() {
         </div>
       </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
